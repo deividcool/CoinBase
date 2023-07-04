@@ -1,9 +1,9 @@
-import React, { FC, useCallback, useState} from "react";
+import React, { FC, useCallback, useState } from "react";
 import { View, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import DraggableFlatList, {
     RenderItemParams,
-  } from 'react-native-draggable-flatlist';
+} from 'react-native-draggable-flatlist';
 import * as Haptics from 'expo-haptics';
 
 import WatchlistItem from './WhatchlistItem';
@@ -32,23 +32,23 @@ const Whatchlist: FC<TopMoversProps> = ({ coinData }) => {
                     isActive={isActive}
                 />
             )
-},[])
+        }, [])
 
-return (
-    <View>
-        <Text style={styles.watchlistText}>Watchlist</Text>
-        <View style={styles.watchlistContainer}>
-            <DraggableFlatList
-                data={coinData}
-                keyExtractor={(item) => item.id.toString()}
-                scrollEnabled={false}
-                onDragBegin={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)}
-                onDragEnd={( {data} ) => dispatch(watchlistActions.updateCoinData(data))}
-                renderItem={renderItem}
-            />
+    return (
+        <View>
+            <Text style={styles.watchlistText}>Watchlist</Text>
+            <View style={styles.watchlistContainer}>
+                <DraggableFlatList
+                    data={coinData}
+                    keyExtractor={(item) => item.id.toString()}
+                    scrollEnabled={false}
+                    onDragBegin={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)}
+                    onDragEnd={({ data }) => dispatch(watchlistActions.updateCoinData(data))}
+                    renderItem={renderItem}
+                />
+            </View>
         </View>
-    </View>
-)
+    )
 }
 
 const styles = StyleSheet.create({
