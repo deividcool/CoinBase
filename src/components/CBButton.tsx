@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { TouchableHighlight, View, Text, Animated, StyleSheet } from 'react-native';
-import * as Haptics from 'expo-haptics';
-import Colors from '../constants/Colors';
+import React, { FC } from "react";
+import { TouchableHighlight, View, Text, Animated, StyleSheet } from "react-native";
+import * as Haptics from "expo-haptics";
+import Colors from "../constants/Colors";
 
 
 interface CBButtonProps {
@@ -24,36 +24,37 @@ const CBButton: FC<CBButtonProps> = ({ title }) => {
             toValue: 1,
             useNativeDriver: true,
         }).start();
-    }
+    }  
 
     const animatedStyle = {
         transform: [{scale: animatedValue}]
     }
-
+    
     return (
         <Animated.View style={[styles.container, animatedStyle]}>
-            <TouchableHighlight
+            <TouchableHighlight 
                 onPressIn={onPressIn}
                 onPressOut={onPressOut}
-                style={{borderRadius: 10}}
-                onPress={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)}
+                style={{ borderRadius: 10}}
+                onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                }}
             >
                 <View style={styles.button}>
                     <Text style={styles.text}>{title}</Text>
                 </View>
             </TouchableHighlight>
         </Animated.View>
-    );
-
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
-        width: '80%',
-        borderRadius: 8,
+        width: "85%",
+        borderRadius: 8
     },
     button: {
-        width: '100%',
+        width: "100%",
         height: 57,
         alignItems: 'center',
         justifyContent: 'center',
@@ -63,8 +64,8 @@ const styles = StyleSheet.create({
     text: {
         color: 'white',
         fontWeight: 'bold',
-    },
-});
-
+        fontSize: 16,
+    }
+})
 
 export default CBButton;

@@ -1,99 +1,108 @@
 import React, { FC } from 'react';
 import {
-    TouchableHighlight,
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    Animated
+  TouchableHighlight,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Animated,
 } from 'react-native';
 
 import Colors from '../constants/Colors';
+
 
 interface TopMoversListItemProps {
     id: number;
     symbol: string;
     price: number;
-    porcentChange: number;
+    percentChange: number;
 }
 
 const TopMoversListItem: FC<TopMoversListItemProps> = ({
     id,
     symbol,
     price,
-    porcentChange,
+    percentChange,
 }) => {
 
     const animatedValue = new Animated.Value(1);
 
-    const onPressIn = () => {
+    const handlePressIn = () => {
         Animated.spring(animatedValue, {
-            toValue: 0.9,
-            useNativeDriver: true,
+          toValue: 0.98,
+          useNativeDriver: true,
         }).start();
-    }
-
-    const onPressOut = () => {
+      };
+    
+      const handlePressOut = () => {
         Animated.spring(animatedValue, {
-            toValue: 1,
-            useNativeDriver: true,
+          toValue: 1,
+          useNativeDriver: true,
         }).start();
-    }
+      };
+    
+      const animatedStyle = {
+        transform: [{ scale: animatedValue }],
+      };
+    
 
-    const animatedStyle = {
-        transform: [{scale: animatedValue}]
-    }
 
     return (
         <TouchableHighlight
-            onPressIn={onPressIn}
-            onPressOut={onPressOut}
-            underlayColor='#fafbfe'
-            onPress={() => console.log('pressed')}
-            style={{width: 143, marginRight: 17}}
+            onPressIn={handlePressIn}
+            onPressOut={handlePressOut}
+            underlayColor='#FAFBFE'
+            onPress={() => {console.log('pressed')}}
+            style={{ width: 143, marginRight: 17 }}
         >
-            <Animated.View style={[styles.lisItem, animatedStyle]}>
-                <Image
+            <Animated.View style={[styles.listItem, animatedStyle]}>
+                <Image 
                     style={styles.logo}
-                    source={{ uri: `https://s2.coinmarketcap.com/static/img/coins/64x64/${id.toString()}.png` }}
-
+                    source={{
+                        uri: `https://s2.coinmarketcap.com/static/img/coins/64x64/${id.toString()}.png`,
+                    }}
                 />
 
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                     <Text style={styles.tickerText}>{symbol}</Text>
                     <Text style={styles.priceText}>
                         $
-                        {price.toLocaleString(undefined, {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        })}
+                    {price.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                    })}
                     </Text>
                 </View>
+
                 <View>
                     <Text style={[
-                        {
-                            color: porcentChange > 0 ? Colors.positiveGreen : Colors.negativeRed,
-                        },
-                        styles.changeText
-                    ]}>
-                        {porcentChange > 0 ? '+' : ''}
-                        {porcentChange.toFixed(2)}%
-                    </Text>
+                    {
+                        color: percentChange > 0 ? Colors.positiveGreen : Colors.negativeRed,
+                    },
+                    styles.changeText
+                        ]}
+                    >
+                    {percentChange > 0 ? '+' : ''}
+                    {percentChange.toFixed(2)}%
+                </Text>
                 </View>
+
+                
+
             </Animated.View>
         </TouchableHighlight>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
-    lisItem: {
+    listItem: {
         width: 143,
         borderWidth: 1,
         borderRadius: 8,
         borderColor: Colors.border,
         paddingHorizontal: 16,
         paddingVertical: 25,
-    },
+      },
     logo: {
         width: 32,
         height: 32,
@@ -106,15 +115,15 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: '600',
         marginRight: 5,
-    },
-    priceText: {
+      },
+      priceText: {
         fontSize: 15,
         color: Colors.secondarySubtitle,
-    },
-    changeText: {
+      },
+      changeText: {
         fontSize: 26,
         marginTop: 2,
-    }
-})
+      },
+});
 
 export default TopMoversListItem;
