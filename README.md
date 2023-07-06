@@ -10,5 +10,5 @@
 
 [**linkedin**](https://www.linkedin.com/in/devero1394)
 
-[![website](./img/instagram_light.svg)](https://www.instagram.com/devero_1394/#gh-light-mode-only) [**Instagram**](https://www.instagram.com/devero_1394)
+[<img align="left" alt="Github" width="24px" height="24px" src="./img/github_dark.svg" style="padding-right:10px;" />](https://github.com/deividcool/#gh-dark-mode-only)(https://github.com/deividcool/) [**Instagram**](https://www.instagram.com/devero_1394)
 
