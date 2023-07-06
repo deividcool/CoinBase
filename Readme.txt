@@ -1,0 +1,1 @@
+los lenguajes utilizados en esta app son Typescritp, Api´s Coins, Api´s News
